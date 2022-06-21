@@ -1,10 +1,8 @@
-import React from 'react';
+import { Layout } from './components/ui/Layout';
 
 function App() {
   return (
-    <div className="App">
-      Start app
-    </div>
+      <Layout />
   );
 }
 
