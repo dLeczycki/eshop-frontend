@@ -6,7 +6,7 @@ export const Main = () => {
     <Box
       as="main"
       flexGrow="1"
-      p="1em"
+      width="100%"
     >
       <Router />
     </Box>
