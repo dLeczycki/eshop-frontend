@@ -1,8 +1,8 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import { Checkout } from "../checkout/Checkout"
 import { Products } from "../products/Products"
-import { Home } from "../ui/Home"
-import { NotFound } from "../ui/NotFound"
+import { Home } from "../home/Home"
+import { NotFound } from "../not-found/NotFound"
 
 export const Router = () => {
   return (
