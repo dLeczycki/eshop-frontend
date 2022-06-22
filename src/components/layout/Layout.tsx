@@ -11,6 +11,7 @@ export const Layout = () => {
       justify="space-between"
       direction="column"
       h="100vh"
+      maxH="100vh"
     >
       <Navbar />
       <Main />
