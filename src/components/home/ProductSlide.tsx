@@ -25,7 +25,7 @@ export const ProductSlide = (props: Props) => {
           py={2}
           px={4}
           color="white"
-          font-weight="bold"
+          fontWeight="bold"
           fontSize={["3xl", "3xl", "3xl", "3xl", "6xl"]}
           textShadow="0 0 6px #2B6CB0"
           borderBottom="4px solid"
