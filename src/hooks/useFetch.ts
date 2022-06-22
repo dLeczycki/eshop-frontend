@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { config } from "../config/config";
-import { request } from "../utils/request";
 
 interface State<T>{
   data?: T;
