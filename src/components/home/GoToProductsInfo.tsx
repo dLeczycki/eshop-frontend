@@ -7,7 +7,7 @@ export const GoToProductsInfo = () => {
     <Box
       textAlign={["center", "center", "center", "right"]}
       mb={6}
-      mr={10}
+      mr={[0, 0, 0, 10]}
       minWidth={["100%", "100%", "100%", "480px"]}
       maxWidth={"480px"}
     >

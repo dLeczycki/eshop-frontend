@@ -9,6 +9,7 @@ export const Home = () => {
       align="center"
       justifyContent="space-between"
       direction={["column", "column", "column", "row"]}
+      height="100%"
     >
       <GoToProductsInfo />
       <ProductsSlider />
