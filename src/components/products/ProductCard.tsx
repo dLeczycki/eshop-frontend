@@ -13,8 +13,6 @@ export const ProductCard = (props: Props) => {
   const checkout = useCheckout();
 
   const handleAddToCheckout = (e: SyntheticEvent) => {
-    e.stopPropagation();
-
     const checkoutProduct: CheckoutProduct = {product, count: 1};
     checkout.addToCheckout(checkoutProduct);
   }
