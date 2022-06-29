@@ -32,7 +32,7 @@ export function checkoutReducer(state: CheckoutProduct[], action: CheckoutAction
     case CheckoutActionType.REMOVE:
       index = getIndexInCheckout(state, action.payload);
       if(index < 0) return [...state];
-      if(state[index].count <= 1) return state.filter(current => current.product.id !== action.payload.product.id);
+      if(state[index].count <= 1 || state[index].count === action.payload.count) return state.filter(current => current.product.id !== action.payload.product.id);
 
       newState = [...state];
       newState[index].count -= action.payload.count;
