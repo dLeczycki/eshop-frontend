@@ -1,9 +1,15 @@
-import { Box } from "@chakra-ui/react"
+import { useDisclosure } from "@chakra-ui/react"
+import { CheckoutDrawer } from "./CheckoutDrawer";
+import { OpenCheckoutButton } from "./OpenCheckoutButton";
 
 export const Checkout = () => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
+
   return (
-    <Box>
-      Koszyk
-    </Box>
+    <>
+      <OpenCheckoutButton handleClick={onOpen}/>
+      <CheckoutDrawer isOpen={isOpen} onClose={onClose}/>
+    </>
   )
 }

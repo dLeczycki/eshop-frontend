@@ -1,5 +1,5 @@
 import { Flex } from "@chakra-ui/react"
-import { GoToCheckoutButton } from "../checkout/GoToCheckoutButton"
+import { Checkout } from "../checkout/Checkout"
 import { Logo } from "./Logo"
 
 export const Navbar = () => {
@@ -15,7 +15,7 @@ export const Navbar = () => {
       borderColor="blue.400"
     >
       <Logo />
-      <GoToCheckoutButton />
+      <Checkout />
     </Flex>
   )
 }

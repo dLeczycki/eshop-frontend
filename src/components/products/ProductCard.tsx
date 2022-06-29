@@ -1,7 +1,9 @@
 import { Button, Flex, Heading, Image, Text } from "@chakra-ui/react";
 import { config } from "../../config/config";
-import { Product } from "types";
+import { CheckoutProduct, Product } from "types";
 import { useNavigate } from "react-router-dom";
+import { useCheckout } from "../../contexts/checkout/checkout.context";
+import { SyntheticEvent } from "react";
 
 interface Props{
   product: Product;
@@ -10,9 +12,17 @@ interface Props{
 export const ProductCard = (props: Props) => {
   const {product} = props;
   const navigate = useNavigate();
+  const checkout = useCheckout();
 
   const handleRedirectToProduct = () => {
     navigate(`/produkty/${product.id}`);
+  }
+
+  const handleAddToCheckout = (e: SyntheticEvent) => {
+    e.stopPropagation();
+
+    const checkoutProduct: CheckoutProduct = {product, count: 1};
+    checkout.addToCheckout(checkoutProduct);
   }
 
   return (
@@ -61,6 +71,7 @@ export const ProductCard = (props: Props) => {
       <Button
         colorScheme="blue"
         borderTopRadius="unset"
+        onClick = {(e) => handleAddToCheckout(e)}
       >
         Dodaj do koszyka
       </Button>
