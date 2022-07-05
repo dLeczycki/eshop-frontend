@@ -9,3 +9,11 @@ export const getIndexInCheckout = (checkout: CheckoutProduct[], checkoutProduct:
 
   return index;
 }
+
+export const calculateTotalAmountInCheckout = (checkout: CheckoutProduct[]): number => {
+  return checkout.reduce((acc, curr) => acc += curr.product.price, 0);
+}
+
+export const pricify = (amount: number): string => {
+  return amount.toFixed(2);
+}

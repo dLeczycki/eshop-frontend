@@ -1,6 +1,8 @@
-import { Box, Button, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerFooter, DrawerHeader, DrawerOverlay, Heading } from "@chakra-ui/react";
-import { CheckoutProductRow } from "./CheckoutProductRow";
+import { Button, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerFooter, DrawerHeader, DrawerOverlay, Heading } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 import { useCheckout } from "../../contexts/checkout/checkout.context";
+import { CheckoutProductsList } from "./CheckoutProductsList";
+import { TotalAmountHeading } from "./TotalAmountHeading";
 
 interface Props{
   isOpen: boolean;
@@ -9,9 +11,13 @@ interface Props{
 
 export const CheckoutDrawer = (props: Props) => {
   const {isOpen, onClose} = props;
-  const {checkout, cleanCheckout} = useCheckout();
+  const navigate = useNavigate();
+  const {cleanCheckout} = useCheckout();
 
-  const totalAmount = checkout.reduce((acc, curr) => acc += curr.product.price, 0).toFixed(2);
+  const handleGoToOrder = () => {
+    onClose();
+    navigate('/zamowienie');
+  }
 
   return (
     <Drawer
@@ -23,18 +29,16 @@ export const CheckoutDrawer = (props: Props) => {
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton />
-          <DrawerHeader>Koszyk</DrawerHeader>
+          <DrawerHeader color="blue.400" fontSize={24}>Koszyk</DrawerHeader>
 
           <DrawerBody display="flex" flexDirection="column" justifyContent="space-between">
-            <Box>
-              {checkout.map(checkoutProduct => <CheckoutProductRow checkoutProduct={checkoutProduct} key={checkoutProduct.product.id}/>)}
-            </Box>
-            <Heading as="h2" fontSize={24} color="blue.600">Koszt całkowity: {totalAmount}zł</Heading>
+            <CheckoutProductsList />
+            <TotalAmountHeading />
           </DrawerBody>
 
-          <DrawerFooter display="flex" flexDirection="column">
-            <Button onClick={cleanCheckout} mb={1} colorScheme='red' w="100%">Wyczyść koszyk</Button>
-            <Button colorScheme='blue' w="100%">Przejdź do dostawy</Button>
+          <DrawerFooter display="flex" gap={2}>
+            <Button onClick={cleanCheckout} colorScheme='red' w="100%">Wyczyść koszyk</Button>
+            <Button onClick={handleGoToOrder} fontWeight="bold" colorScheme='blue' w="100%">Przejdź do zamówienia</Button>
           </DrawerFooter>
         </DrawerContent>
       </Drawer>
