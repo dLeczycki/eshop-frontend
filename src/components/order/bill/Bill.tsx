@@ -1,20 +1,19 @@
-import { Box, Divider, Flex, Heading, List, ListIcon, ListItem, Text } from "@chakra-ui/react"
+import { Box, Divider, Flex, List, ListIcon, ListItem, Text } from "@chakra-ui/react"
 import { faShoppingBasket, faTruck } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { GoToSummary } from "./GoToSummaryButton"
 import { pricify } from "../../../utils/helpers"
 import { useOrder } from "../../../contexts/order/order.context"
 import { useCheckout } from "../../../contexts/checkout/checkout.context"
+import { TotalOrderAmountHeading } from "./TotalOrderAmountHeading"
 
 const CheckoutIcon = () => <FontAwesomeIcon icon={faShoppingBasket} />
 const ShipmentIcon = () => <FontAwesomeIcon icon={faTruck} />
 
 export const Bill = () => {
-  const {orderTotalAmount, shipment} = useOrder();
+  const {shipment} = useOrder();
   const {checkoutTotalAmount} = useCheckout();
 
   return (
-    <>
       <Box
         border="2px solid"
         borderColor="blue.400"
@@ -44,9 +43,7 @@ export const Bill = () => {
           </ListItem>
         </List>
         <Divider my={2}/>
-        <Heading as="h3" size="md" textAlign="right">Razem: {pricify(orderTotalAmount)}zł</Heading>
+        <TotalOrderAmountHeading />
       </Box>
-      <GoToSummary />
-    </>
   )
 }

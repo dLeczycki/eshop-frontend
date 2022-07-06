@@ -1,5 +1,6 @@
 import { Box, Flex, Heading, Stack } from "@chakra-ui/react";
 import { Bill } from "./bill/Bill";
+import { GoToSummaryButton } from "./bill/GoToSummaryButton";
 import { PaymentForm } from "./payment/PaymentForm";
 import { RecipientForm } from "./recipient/RecipientForm";
 import { ShipmentForm } from "./shipment/ShipmentForm";
@@ -43,6 +44,7 @@ export const Order = () => {
           padding={4}
         >
           <Bill />
+          <GoToSummaryButton />
         </Flex>
       </Flex>
     </Box>
