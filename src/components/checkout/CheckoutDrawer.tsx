@@ -1,8 +1,9 @@
-import { Button, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerFooter, DrawerHeader, DrawerOverlay, Heading } from "@chakra-ui/react";
-import { useNavigate } from "react-router-dom";
+import { Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerFooter, DrawerHeader, DrawerOverlay } from "@chakra-ui/react";
 import { useCheckout } from "../../contexts/checkout/checkout.context";
 import { CheckoutProductsList } from "./CheckoutProductsList";
-import { TotalAmountHeading } from "./TotalAmountHeading";
+import { CleanCheckoutButton } from "./CleanCheckoutButton";
+import { GoToOrderButton } from "./GoToOrderButton";
+import { TotalCheckoutAmountHeading } from "./TotalCheckoutAmountHeading";
 
 interface Props{
   isOpen: boolean;
@@ -10,14 +11,8 @@ interface Props{
 }
 
 export const CheckoutDrawer = (props: Props) => {
+  const {checkout} = useCheckout();
   const {isOpen, onClose} = props;
-  const navigate = useNavigate();
-  const {cleanCheckout} = useCheckout();
-
-  const handleGoToOrder = () => {
-    onClose();
-    navigate('/zamowienie');
-  }
 
   return (
     <Drawer
@@ -33,12 +28,12 @@ export const CheckoutDrawer = (props: Props) => {
 
           <DrawerBody display="flex" flexDirection="column" justifyContent="space-between">
             <CheckoutProductsList />
-            <TotalAmountHeading />
+            <TotalCheckoutAmountHeading />
           </DrawerBody>
 
-          <DrawerFooter display="flex" gap={2}>
-            <Button onClick={cleanCheckout} colorScheme='red' w="100%">Wyczyść koszyk</Button>
-            <Button onClick={handleGoToOrder} fontWeight="bold" colorScheme='blue' w="100%">Przejdź do zamówienia</Button>
+          <DrawerFooter display="flex" gap={2} justifyContent="space-between">
+            <CleanCheckoutButton />
+            {checkout.length > 0 && <GoToOrderButton onClick={onClose}/>}
           </DrawerFooter>
         </DrawerContent>
       </Drawer>

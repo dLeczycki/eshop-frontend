@@ -7,9 +7,10 @@ import { useCheckout } from "../../contexts/checkout/checkout.context";
 
 interface Props{
   checkoutProduct: CheckoutProduct;
+  allowDelete: boolean;
 }
 export const CheckoutProductRow = (props: Props) => {
-  const {checkoutProduct} = props;
+  const {checkoutProduct, allowDelete} = props;
   const {removeFromCheckout} = useCheckout();
 
   const handleRemoveFromCheckout = () => {
@@ -24,7 +25,7 @@ export const CheckoutProductRow = (props: Props) => {
         <Text>{checkoutProduct.product.price}zł</Text>
         <Text>{checkoutProduct.count} szt.</Text>
       </Flex>
-      <Button colorScheme="red" onClick={handleRemoveFromCheckout}><FontAwesomeIcon icon={faTimes} /></Button>
+      {allowDelete && <Button colorScheme="red" onClick={handleRemoveFromCheckout}><FontAwesomeIcon icon={faTimes} /></Button>}
     </Flex>
   )
 }

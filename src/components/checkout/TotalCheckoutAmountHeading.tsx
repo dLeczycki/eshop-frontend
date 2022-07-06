@@ -2,7 +2,7 @@ import { Heading } from "@chakra-ui/react"
 import { useCheckout } from "../../contexts/checkout/checkout.context"
 import { pricify } from "../../utils/helpers";
 
-export const TotalAmountHeading = () => {
+export const TotalCheckoutAmountHeading = () => {
   const {checkoutTotalAmount} = useCheckout();
   
   return (
