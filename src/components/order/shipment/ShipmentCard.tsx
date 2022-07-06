@@ -1,13 +1,14 @@
 import { Box, Flex, Text, useRadio } from "@chakra-ui/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { DeliveryType } from "types";
+import { pricify } from "../../../utils/helpers";
+import { Shipment } from "types";
 
 interface Props{
-  deliveryType: DeliveryType;
+  shipment: Shipment;
 }
 
-export const DeliveryTypeCard = (props: Props) => {
-  const {deliveryType, ...radioProps} = props;
+export const ShipmentCard = (props: Props) => {
+  const {shipment, ...radioProps} = props;
   const { getInputProps, getCheckboxProps } = useRadio(radioProps);
 
   const input = getInputProps()
@@ -38,10 +39,10 @@ export const DeliveryTypeCard = (props: Props) => {
         py={3}
       >
         <Box textAlign="center" fontSize="40px">
-          <FontAwesomeIcon icon={deliveryType.icon} />
+          <FontAwesomeIcon icon={shipment.icon} />
         </Box>
-        <Text fontSize="20px">{deliveryType.fullName}</Text>
-        <Text>{deliveryType.price.toFixed(2)}zł</Text>
+        <Text fontSize="20px">{shipment.fullName}</Text>
+        <Text>{pricify(shipment.price)}zł</Text>
       </Flex>
     </Box>
   )
