@@ -29,7 +29,7 @@ const CheckoutContext = React.createContext<ContextValues>(initialContextValues)
 
 function CheckoutProvider(props: ProviderProps) {
   const {children} = props;
-  const [checkoutInLS, setCheckoutInLS] = useLocalStorage<CheckoutProduct[]>('checkout');
+  const [checkoutInLS, setCheckoutInLS] = useLocalStorage<CheckoutProduct[]>('checkout', []);
   const [checkout, dispatch] = useReducer(checkoutReducer, checkoutInLS);
   const [checkoutTotalAmount, setCheckoutTotalAmount] = useState<number>(0);
 
