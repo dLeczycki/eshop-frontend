@@ -1,5 +1,5 @@
 import React, { ReactNode, useContext, useEffect, useState } from "react";
-import { Payment, Shipment } from "types";
+import { Payment, Recipient, RecipientError, Shipment } from "types";
 import { useCheckout } from "../checkout/checkout.context";
 
 import { payments, shipments } from "../../utils/dummy";
@@ -9,20 +9,24 @@ interface ProviderProps{
 }
 
 interface ContextValues{
-  recipient: Object;
+  recipient: Recipient;
+  recipientError: RecipientError;
+  setRecipient: React.Dispatch<React.SetStateAction<Recipient>>;
   shipment: Shipment;
-  setShipment: (shipment: Shipment) => void;
+  setShipment: React.Dispatch<React.SetStateAction<Shipment>>;
   payment: Payment;
-  setPayment: (payment: Payment) => void;
+  setPayment: React.Dispatch<React.SetStateAction<Payment>>;
   orderTotalAmount: number;
 }
 
 const initialContextValues = {
-  recipient: {},
+  recipient: {firstname: '', lastname: '', email: '', phone: '', postalCode: '', city: '', address: ''},
+  recipientError: {firstname: '', lastname: '', email: '', phone: '', postalCode: '', city: '', address: ''},
+  setRecipient: () => {},
   shipment: shipments[0],
-  setShipment: (shipment: Shipment) => {},
+  setShipment: () => {},
   payment: payments[0],
-  setPayment: (payment: Payment) => {},
+  setPayment: () => {},
   orderTotalAmount: 0,
 }
 
@@ -30,10 +34,11 @@ const OrderContext = React.createContext<ContextValues>(initialContextValues);
 
 function OrderProvider(props: ProviderProps) {
   const {children} = props;
-  const [recipient, setRecipient] = useState<Object>({});
+  const [recipient, setRecipient] = useState<Recipient>(initialContextValues.recipient);
+  const [recipientError, setRecipientErrors] = useState<RecipientError>(initialContextValues.recipientError);
   const [shipment, setShipment] = useState<Shipment>(initialContextValues.shipment);
   const [payment, setPayment] = useState<Payment>(initialContextValues.payment);
-  const [orderTotalAmount, setOrderTotalAmount] = useState<number>(0);
+  const [orderTotalAmount, setOrderTotalAmount] = useState<number>(initialContextValues.orderTotalAmount);
   const {checkoutTotalAmount} = useCheckout();
 
   useEffect(() => {
@@ -41,7 +46,7 @@ function OrderProvider(props: ProviderProps) {
   }, [shipment, checkoutTotalAmount]);
 
   return (
-    <OrderContext.Provider value={{recipient, shipment, setShipment, payment, setPayment, orderTotalAmount}}>
+    <OrderContext.Provider value={{recipient, recipientError, setRecipient, shipment, setShipment, payment, setPayment, orderTotalAmount}}>
       {children}
     </OrderContext.Provider>
   )

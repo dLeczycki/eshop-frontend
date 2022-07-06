@@ -1,40 +1,78 @@
-import { Box, FormControl, FormLabel, Heading, Input, Stack } from "@chakra-ui/react"
+import { ChangeEvent } from "react";
+import { Box, Heading, Stack } from "@chakra-ui/react"
+import { useOrder } from "../../../contexts/order/order.context";
+import { FormRow } from "./FormRow";
 
 export const RecipientForm = () => {
+  const {recipient, recipientError, setRecipient} = useOrder();
+
+  const handleRecipientChange = (property: string) => {
+    return (e: ChangeEvent<HTMLInputElement>) => {
+      setRecipient((prev) => ({...prev, [property]: e.target.value}));
+    }
+  }
+
   return (
     <Box>
       <Heading as="h2" color="blue.400" size="lg">Dane odbiorcy</Heading>
       <Stack spacing={3} mt={4} w="100%">
-        <FormControl isRequired>
-          <FormLabel htmlFor="firstname">Imię:</FormLabel>
-          <Input id="firstname" size="md" w="100%"/>
-        </FormControl>
-        <FormControl isRequired>
-          <FormLabel htmlFor="surname">Nazwisko:</FormLabel>
-          <Input id="surname" size="md" w="100%"/>
-        </FormControl>
-        <FormControl isRequired>
-          <FormLabel htmlFor="email">Email:</FormLabel>
-          <Input id="email" type="email" size="md" w="100%"/>
-        </FormControl>
-        <FormControl>
-          <FormLabel htmlFor='phone'>Numer telefonu:</FormLabel>
-          <Input id='phone' size="md" w="100%"/>
-        </FormControl>
+        <FormRow 
+          label="Imię" 
+          id="firstname" 
+          value={recipient.firstname} 
+          setValue={handleRecipientChange('firstname')} 
+          error={recipientError.firstname} 
+          formControlAdditionalProps={{isRequired: true}}
+        />
+        <FormRow 
+          label="Nazwisko" 
+          id="lastname" 
+          value={recipient.lastname} 
+          setValue={handleRecipientChange('lastname')} 
+          error={recipientError.lastname} 
+          formControlAdditionalProps={{isRequired: true}}
+        />
+        <FormRow 
+          label="Email" 
+          id="email" 
+          value={recipient.email} 
+          setValue={handleRecipientChange('email')} 
+          error={recipientError.email} 
+          formControlAdditionalProps={{isRequired: true}}
+        />
+        <FormRow 
+          label="Numer telefonu" 
+          id="phone" 
+          value={recipient.phone as string} 
+          setValue={handleRecipientChange('phone')} 
+          error={recipientError.phone} 
+        />
         <Stack direction="row" spacing={4}>
-          <FormControl isRequired w="40%" minW="140px">
-            <FormLabel htmlFor="postalCode">Kod pocztowy:</FormLabel>
-            <Input id="postalCode" size="md" w="100%"/>
-          </FormControl>
-          <FormControl isRequired>
-            <FormLabel htmlFor="city">Miasto:</FormLabel>
-            <Input id="city" size="md" w="100%"/>
-          </FormControl>
+          <FormRow 
+            label="Kod pocztowy" 
+            id="postalCode" 
+            value={recipient.postalCode} 
+            setValue={handleRecipientChange('postalCode')} 
+            error={recipientError.postalCode} 
+            formControlAdditionalProps={{isRequired: true, w:"40%", minW:"140px"}}
+          />
+          <FormRow 
+            label="Miasto" 
+            id="city" 
+            value={recipient.city} 
+            setValue={handleRecipientChange('city')} 
+            error={recipientError.city} 
+            formControlAdditionalProps={{isRequired: true}}
+          />
         </Stack>
-        <FormControl isRequired>
-          <FormLabel htmlFor="address">Adres:</FormLabel>
-          <Input id="address" size="md" w="100%"/>
-        </FormControl>
+        <FormRow 
+          label="Adres" 
+          id="address" 
+          value={recipient.address} 
+          setValue={handleRecipientChange('address')} 
+          error={recipientError.address} 
+          formControlAdditionalProps={{isRequired: true}}
+        />
       </Stack>
     </Box>
   )
