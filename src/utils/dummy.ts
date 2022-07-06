@@ -1,5 +1,5 @@
 import { faBoltLightning, faBox, faTruck } from "@fortawesome/free-solid-svg-icons";
-import { Shipment } from "types";
+import { Payment, Shipment } from "types";
 
 export const shipments: Shipment[] = [
   {
@@ -21,3 +21,14 @@ export const shipments: Shipment[] = [
     price: 0.00,
   },
 ];
+
+export const payments: Payment[] = [
+  {
+    name: 'payme',
+    fullName: 'Payme',
+  },
+  {
+    name: 'transakcje25',
+    fullName: 'Transakcje25',
+  }
+]

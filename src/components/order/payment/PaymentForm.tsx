@@ -1,13 +1,22 @@
 import { Flex, Heading, Radio, RadioGroup, Stack } from "@chakra-ui/react"
+import { Payment } from "types";
+import { useOrder } from "../../../contexts/order/order.context";
+import { payments } from "../../../utils/dummy";
 
 export const PaymentForm = () => {
+  const {payment, setPayment} = useOrder();
+
+  const handlePaymentChange = (value: string) => {
+    const payment = payments.find(payment => payment.name === value) as Payment;
+    setPayment(payment);
+  }
+
   return (
     <Flex direction="column">
       <Heading as="h2" color="blue.400" size="lg">Płatność</Heading>
-      <RadioGroup defaultValue="payme">
+      <RadioGroup value={payment.name} onChange={handlePaymentChange}>
         <Stack mt={4}>
-          <Radio value="payme">Payme</Radio>
-          <Radio value="transakcje25">Transakcje25</Radio>  
+          {payments.map(payment => (<Radio value={payment.name}>{payment.fullName}</Radio>))}
         </Stack>
       </RadioGroup>
     </Flex>

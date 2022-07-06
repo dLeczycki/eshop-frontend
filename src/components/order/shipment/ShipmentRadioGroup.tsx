@@ -1,14 +1,22 @@
 import { RadioGroup, Stack, useRadioGroup } from "@chakra-ui/react";
+import { Shipment } from "types";
 import { ShipmentCard } from "./ShipmentCard";
 
+import { useOrder } from "../../../contexts/order/order.context";
 import { shipments } from "../../../utils/dummy";
 
-export const DeliveryTypesRadioGroup = () => {
+export const ShipmentRadioGroup = () => {
+  const {setShipment} = useOrder();
+
+  const handleShipmentChange = (nextValue: string) => {
+    const shipment = shipments.find(shipment => shipment.name === nextValue) as Shipment;
+    setShipment(shipment);
+  }
 
   const { getRootProps, getRadioProps } = useRadioGroup({
-    name: 'delivery',
-    defaultValue: 'courier',
-    onChange: console.log,
+    name: 'shipment',
+    defaultValue: shipments[0].name,
+    onChange: handleShipmentChange,
   })
 
   const group = getRootProps();

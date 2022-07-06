@@ -2,12 +2,16 @@ import { Box, Divider, Flex, Heading, List, ListIcon, ListItem, Text } from "@ch
 import { faShoppingBasket, faTruck } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { GoToSummary } from "./GoToSummaryButton"
+import { pricify } from "../../../utils/helpers"
+import { useOrder } from "../../../contexts/order/order.context"
+import { useCheckout } from "../../../contexts/checkout/checkout.context"
 
 const CheckoutIcon = () => <FontAwesomeIcon icon={faShoppingBasket} />
 const ShipmentIcon = () => <FontAwesomeIcon icon={faTruck} />
 
 export const Bill = () => {
-  
+  const {orderTotalAmount, shipment} = useOrder();
+  const {checkoutTotalAmount} = useCheckout();
 
   return (
     <>
@@ -26,7 +30,7 @@ export const Bill = () => {
               <ListIcon as={CheckoutIcon} color="blue.600"/>
               <Text ml={2}>Koszyk:</Text>
             </Flex>
-            <Text>999,00zł</Text>
+            <Text>{pricify(checkoutTotalAmount)}zł</Text>
           </ListItem>
           <ListItem display="flex" justifyContent="space-between">
             <Flex
@@ -36,11 +40,11 @@ export const Bill = () => {
               <ListIcon as={ShipmentIcon} color="blue.600"/>
               <Text ml={2}>Dostawa:</Text>
             </Flex>
-            <Text>999,00zł</Text>
+            <Text>{pricify(shipment.price)}zł</Text>
           </ListItem>
         </List>
         <Divider my={2}/>
-        <Heading as="h3" size="md" textAlign="right">Razem: 999,99zł</Heading>
+        <Heading as="h3" size="md" textAlign="right">Razem: {pricify(orderTotalAmount)}zł</Heading>
       </Box>
       <GoToSummary />
     </>
