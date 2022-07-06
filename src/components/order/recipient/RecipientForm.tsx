@@ -3,7 +3,12 @@ import { Box, Heading, Stack } from "@chakra-ui/react"
 import { useOrder } from "../../../contexts/order/order.context";
 import { FormRow } from "./FormRow";
 
-export const RecipientForm = () => {
+interface Props{
+  isReadOnly?: boolean;
+}
+
+export const RecipientForm = (props: Props) => {
+  const {isReadOnly} = props;
   const {recipient, recipientError, setRecipient} = useOrder();
 
   const handleRecipientChange = (property: string) => {
@@ -22,6 +27,7 @@ export const RecipientForm = () => {
           value={recipient.firstname} 
           setValue={handleRecipientChange('firstname')} 
           error={recipientError.firstname} 
+          isReadOnly={isReadOnly}
           formControlAdditionalProps={{isRequired: true}}
         />
         <FormRow 
@@ -30,6 +36,7 @@ export const RecipientForm = () => {
           value={recipient.lastname} 
           setValue={handleRecipientChange('lastname')} 
           error={recipientError.lastname} 
+          isReadOnly={isReadOnly}
           formControlAdditionalProps={{isRequired: true}}
         />
         <FormRow 
@@ -38,6 +45,7 @@ export const RecipientForm = () => {
           value={recipient.email} 
           setValue={handleRecipientChange('email')} 
           error={recipientError.email} 
+          isReadOnly={isReadOnly}
           formControlAdditionalProps={{isRequired: true}}
         />
         <FormRow 
@@ -46,6 +54,7 @@ export const RecipientForm = () => {
           value={recipient.phone as string} 
           setValue={handleRecipientChange('phone')} 
           error={recipientError.phone} 
+          isReadOnly={isReadOnly}
         />
         <Stack direction="row" spacing={4}>
           <FormRow 
@@ -54,6 +63,7 @@ export const RecipientForm = () => {
             value={recipient.postalCode} 
             setValue={handleRecipientChange('postalCode')} 
             error={recipientError.postalCode} 
+            isReadOnly={isReadOnly}
             formControlAdditionalProps={{isRequired: true, w:"40%", minW:"140px"}}
           />
           <FormRow 
@@ -62,6 +72,7 @@ export const RecipientForm = () => {
             value={recipient.city} 
             setValue={handleRecipientChange('city')} 
             error={recipientError.city} 
+            isReadOnly={isReadOnly}
             formControlAdditionalProps={{isRequired: true}}
           />
         </Stack>
@@ -71,6 +82,7 @@ export const RecipientForm = () => {
           value={recipient.address} 
           setValue={handleRecipientChange('address')} 
           error={recipientError.address} 
+          isReadOnly={isReadOnly}
           formControlAdditionalProps={{isRequired: true}}
         />
       </Stack>
