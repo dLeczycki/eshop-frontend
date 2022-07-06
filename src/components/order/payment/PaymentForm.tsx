@@ -16,7 +16,7 @@ export const PaymentForm = () => {
       <Heading as="h2" color="blue.400" size="lg">Płatność</Heading>
       <RadioGroup value={payment.name} onChange={handlePaymentChange}>
         <Stack mt={4}>
-          {payments.map(payment => (<Radio value={payment.name}>{payment.fullName}</Radio>))}
+          {payments.map(payment => (<Radio key={payment.name} value={payment.name}>{payment.fullName}</Radio>))}
         </Stack>
       </RadioGroup>
     </Flex>
