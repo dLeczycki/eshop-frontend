@@ -3,9 +3,13 @@ import { Shipment } from "types";
 import { ShipmentCard } from "./ShipmentCard";
 
 import { useOrder } from "../../../contexts/order/order.context";
-import { shipments } from "../../../utils/dummy";
 
-export const ShipmentRadioGroup = () => {
+interface Props{
+  shipments: Shipment[];
+}
+
+export const ShipmentRadioGroup = (props: Props) => {
+  const {shipments} = props;
   const {setShipment} = useOrder();
 
   const handleShipmentChange = (nextValue: string) => {
