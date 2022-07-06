@@ -3,7 +3,7 @@ import { CheckoutProduct } from "types";
 import { checkoutReducer } from "./checkout.reducer";
 import { CheckoutActionType } from "./checkout.actions";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
-import { calculateTotalAmountInCheckout, pricify } from "../../utils/helpers";
+import { calculateTotalAmountInCheckout } from "../../utils/helpers";
 
 interface ProviderProps{
   children: ReactNode;
@@ -11,7 +11,7 @@ interface ProviderProps{
 
 interface ContextValues{
   checkout: CheckoutProduct[];
-  totalAmount: string;
+  checkoutTotalAmount: number;
   addToCheckout: (checkoutProduct: CheckoutProduct) => void;
   removeFromCheckout: (checkoutProduct: CheckoutProduct) => void;
   cleanCheckout: () => void; 
@@ -19,7 +19,7 @@ interface ContextValues{
 
 const initialContextValues = {
   checkout: [],
-  totalAmount: '0.00',
+  checkoutTotalAmount: 0,
   addToCheckout: () => {},
   removeFromCheckout: () => {},
   cleanCheckout: () => {},
@@ -31,11 +31,11 @@ function CheckoutProvider(props: ProviderProps) {
   const {children} = props;
   const [checkoutInLS, setCheckoutInLS] = useLocalStorage<CheckoutProduct[]>('checkout');
   const [checkout, dispatch] = useReducer(checkoutReducer, checkoutInLS);
-  const [totalAmount, setTotalAmount] = useState<string>('0.00');
+  const [checkoutTotalAmount, setCheckoutTotalAmount] = useState<number>(0);
 
   useEffect(() => {
     setCheckoutInLS(checkout);
-    setTotalAmount(pricify(calculateTotalAmountInCheckout(checkout)));
+    setCheckoutTotalAmount(calculateTotalAmountInCheckout(checkout));
   }, [checkout]);
 
   const addToCheckout = (checkoutProduct: CheckoutProduct): void => {
@@ -51,7 +51,7 @@ function CheckoutProvider(props: ProviderProps) {
   }
 
   return (
-    <CheckoutContext.Provider value={{checkout, totalAmount, addToCheckout, removeFromCheckout, cleanCheckout}}>
+    <CheckoutContext.Provider value={{checkout, checkoutTotalAmount, addToCheckout, removeFromCheckout, cleanCheckout}}>
       {children}
     </CheckoutContext.Provider>
   )

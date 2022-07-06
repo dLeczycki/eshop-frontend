@@ -1,8 +1,9 @@
 import { Heading } from "@chakra-ui/react"
 import { useCheckout } from "../../contexts/checkout/checkout.context"
+import { pricify } from "../../utils/helpers";
 
 export const TotalAmountHeading = () => {
-  const {totalAmount} = useCheckout();
+  const {checkoutTotalAmount} = useCheckout();
   
   return (
   <Heading 
@@ -15,6 +16,6 @@ export const TotalAmountHeading = () => {
     borderRadius="10px"
     color="blue.600"
   >
-    Razem: {totalAmount}zł
+    Razem: {pricify(checkoutTotalAmount)}zł
   </Heading>)
 }
