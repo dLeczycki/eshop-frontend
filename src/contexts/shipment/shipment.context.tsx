@@ -13,7 +13,7 @@ interface ContextValues{
 }
 
 const initialContextValues = {
-  shipments: [],
+  shipments: [{name: '', fullName: '', icon: '', price: 0}],
   loading: false,
   error: undefined,
 }

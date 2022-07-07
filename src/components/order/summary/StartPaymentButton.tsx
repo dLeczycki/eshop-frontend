@@ -1,7 +1,7 @@
 import { Button, useToast } from "@chakra-ui/react"
 import { useState } from "react";
 import { config } from "../../../config/config";
-import { Order } from "types";
+import { OrderToPlace } from "types";
 import { useCheckout } from "../../../contexts/checkout/checkout.context";
 import { useOrder } from "../../../contexts/order/order.context";
 
@@ -19,10 +19,10 @@ export const StartPaymentButton = () => {
   const handleStartPayment = async () => {
     setIsLoading(true);
 
-    const order: Order = {
-      recipient,
-      payment,
-      shipment,
+    const order: OrderToPlace = {
+      ...recipient,
+      paymentName: payment.name,
+      shipmentName: shipment.name,
       orderProducts,
     }
     

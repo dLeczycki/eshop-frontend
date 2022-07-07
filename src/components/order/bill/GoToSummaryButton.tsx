@@ -1,11 +1,25 @@
-import { Button } from "@chakra-ui/react"
+import { Button, useToast } from "@chakra-ui/react"
 import { useNavigate } from "react-router-dom"
+import { useOrder } from "../../../contexts/order/order.context";
 
 export const GoToSummaryButton = () => {
+  const {validateRecipient} = useOrder();
   const navigate = useNavigate();
+  const toast = useToast();
 
   const handleGoToSummary = () => {
-    navigate('/zamowienie/podsumowanie');
+    if (!validateRecipient()){
+      toast({
+        title: 'Błąd',
+        status: 'error',
+        isClosable: true,
+        description: "Podane dane klienta są niepoprawne",
+        position: "bottom-right",
+      })
+    } else{
+      console.log('here');
+      navigate('/zamowienie/podsumowanie');
+    }
   }
 
   return (

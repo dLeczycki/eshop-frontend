@@ -12,6 +12,7 @@ interface ProviderProps{
 interface ContextValues{
   recipient: Recipient;
   recipientError: RecipientError;
+  validateRecipient: () => boolean;
   setRecipient: React.Dispatch<React.SetStateAction<Recipient>>;
   shipment: Shipment;
   setShipment: React.Dispatch<React.SetStateAction<Shipment>>;
@@ -23,6 +24,7 @@ interface ContextValues{
 const initialContextValues = {
   recipient: {firstname: '', lastname: '', email: '', phone: '', postalCode: '', city: '', address: ''},
   recipientError: {firstname: '', lastname: '', email: '', phone: '', postalCode: '', city: '', address: ''},
+  validateRecipient: () => false,
   setRecipient: () => {},
   shipment: {name: '', fullName: '', icon: '', price: 0},
   setShipment: () => {},
@@ -51,8 +53,41 @@ function OrderProvider(props: ProviderProps) {
     shipment && setOrderTotalAmount(shipment.price + checkoutTotalAmount)
   }, [shipment, checkoutTotalAmount]);
 
+  const validateRecipient = (): boolean => {
+    //TODO: Make better recipient validation
+    let isRecipientValid = true;
+    const recipientError: RecipientError = {firstname: '', lastname: '', email: '', phone: '', postalCode: '', city: '', address: ''}
+    if(!recipient.firstname) {
+      recipientError.firstname = 'Pole nie może być puste';
+      isRecipientValid = false;
+    }
+    if(!recipient.lastname) {
+      recipientError.lastname = 'Pole nie może być puste';
+      isRecipientValid = false;
+    }
+    if(!recipient.email) {
+      recipientError.email = 'Pole nie może być puste';
+      isRecipientValid = false;
+    }
+    if(!recipient.postalCode) {
+      recipientError.postalCode = 'Pole nie może być puste';
+      isRecipientValid = false;
+    }
+    if(!recipient.city) {
+      recipientError.city = 'Pole nie może być puste';
+      isRecipientValid = false;
+    }
+    if(!recipient.address) {
+      recipientError.address = 'Pole nie może być puste';
+      isRecipientValid = false;
+    }
+
+    setRecipientErrors(recipientError);
+    return isRecipientValid;
+  }
+
   return (
-    <OrderContext.Provider value={{recipient, recipientError, setRecipient, shipment, setShipment, payment, setPayment, orderTotalAmount}}>
+    <OrderContext.Provider value={{recipient, recipientError, validateRecipient, setRecipient, shipment, setShipment, payment, setPayment, orderTotalAmount}}>
       {children}
     </OrderContext.Provider>
   )
