@@ -32,8 +32,8 @@ export const CheckoutDrawer = (props: Props) => {
           </DrawerBody>
 
           <DrawerFooter display="flex" gap={2} justifyContent="space-between">
-            <CleanCheckoutButton />
-            {checkout.length > 0 && <GoToOrderButton onClick={onClose}/>}
+          {checkout.length > 0 && <CleanCheckoutButton />}
+          {checkout.length > 0 && <GoToOrderButton onClick={onClose}/>}
           </DrawerFooter>
         </DrawerContent>
       </Drawer>
