@@ -2,6 +2,7 @@ import { Box, Flex, Text, useRadio } from "@chakra-ui/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { pricify } from "../../../utils/helpers";
 import { Shipment } from "types";
+import { IconProp } from "@fortawesome/fontawesome-svg-core";
 
 interface Props{
   shipment: Shipment;
@@ -39,7 +40,7 @@ export const ShipmentCard = (props: Props) => {
         py={3}
       >
         <Box textAlign="center" fontSize="40px">
-          <FontAwesomeIcon icon={shipment.icon} />
+          <FontAwesomeIcon icon={shipment.icon as IconProp} />
         </Box>
         <Text fontSize="20px">{shipment.fullName}</Text>
         <Text>{pricify(shipment.price)}zł</Text>

@@ -1,4 +1,4 @@
-import { CheckoutProduct } from "../../../eshop-backend/types/checkout"
+import { CheckoutProduct, OrderProduct } from "types"
 
 export const getIndexInCheckout = (checkout: CheckoutProduct[], checkoutProduct: CheckoutProduct): number => {
   let index = -1;
@@ -12,6 +12,15 @@ export const getIndexInCheckout = (checkout: CheckoutProduct[], checkoutProduct:
 
 export const calculateTotalAmountInCheckout = (checkout: CheckoutProduct[]): number => {
   return checkout.reduce((acc, curr) => acc += curr.product.price, 0);
+}
+
+export const mapCheckoutToOrderProductsArray = (checkout: CheckoutProduct[]): OrderProduct[] => {
+  return checkout.map(checkoutProduct => {
+    return {
+      productId: checkoutProduct.product.id,
+      count: checkoutProduct.count,
+    } as OrderProduct;
+  });
 }
 
 export const pricify = (amount: number): string => {
