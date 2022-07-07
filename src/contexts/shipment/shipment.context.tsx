@@ -22,7 +22,7 @@ const ShipmentContext = React.createContext<ContextValues>(initialContextValues)
 
 function ShipmentProvider(props: ProviderProps){
   const {children} = props;
-  const {data: shipments = [], loading, error} = useFetch<Shipment[]>('shipments');
+  const {data: shipments = [{name: '', fullName: '', icon: '', price: 0}], loading, error} = useFetch<Shipment[]>('shipments');
 
   return (<ShipmentContext.Provider value={{shipments, loading, error}}>{children}</ShipmentContext.Provider>)
 }
