@@ -4,6 +4,8 @@ import { Home } from "../home/Home"
 import { NotFound } from "../not-found/NotFound"
 import { Order } from "../order/Order"
 import { Summary } from "../order/summary/Summary"
+import { PaymentTemporaryPage } from "../order/payment/PaymentTemporaryPage"
+import { OrderFinished } from "../order/finished/OrderFinished"
 
 export const Router = () => {
   return (
@@ -11,6 +13,8 @@ export const Router = () => {
       <Route path="/" element={<Home />} />
       <Route path="/produkty" element={<Products />} />
       <Route path="/zamowienie/podsumowanie" element={<Summary />} />
+      <Route path="/zamowienie/platnosc" element={<PaymentTemporaryPage />} />
+      <Route path="/zamowienie/zakonczone" element={<OrderFinished />} />
       <Route path="/zamowienie" element={<Order />} />
       <Route path="*" element={<NotFound />} />
     </Routes>

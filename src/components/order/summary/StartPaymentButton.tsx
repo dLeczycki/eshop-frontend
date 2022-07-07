@@ -9,7 +9,7 @@ import { mapCheckoutToOrderProductsArray } from "../../../utils/helpers";
 
 export const StartPaymentButton = () => {
   const {recipient, shipment, payment} = useOrder();
-  const {checkout} = useCheckout();
+  const {checkout, cleanCheckout} = useCheckout();
   const orderProducts = mapCheckoutToOrderProductsArray(checkout);
 
   const [isLoading, setIsLoading] = useState(false);
@@ -44,6 +44,7 @@ export const StartPaymentButton = () => {
       position: "bottom-right",
     });
 
+    cleanCheckout();
     window.location.href = data.redirectUrl;
   }
 
