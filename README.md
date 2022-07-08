@@ -1,46 +1,136 @@
-# Getting Started with Create React App
+<div align="center">
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+  <img src="public/logo512.png" alt="logo" width="200" height="auto" />
+  <h1>eShop Frontend App</h1>
+   
+<h4>
+    <a href="https://esklep.sajko255.usermd.net/">View Demo</a>
+</div>
 
-## Available Scripts
+<br />
 
-In the project directory, you can run:
+<!-- About the Project -->
+## 💦 About the Project
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+<!-- Screenshots -->
+### 📷 Screenshots
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+<div align="center"> 
+  <img src="https://i.ibb.co/GTy7vXk/front-page.png" alt="front-page">
+</div>
 
-### `npm test`
+<br />
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<!-- TechStack -->
+### 🔧 Tech Stack
 
-### `npm run build`
+  <ul>
+    <li><a href="https://www.typescriptlang.org/">Typescript</a></li>
+    <li><a href="https://reactjs.org/">React.js</a></li>
+    <li><a href="https://chakra-ui.com/">ChakraUI</a></li>
+  </ul>
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+<br />
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+<!-- Features -->
+### 📋 Features
 
-### `npm run eject`
+- Sunchronization with BE available here: https://github.com/dLeczycki/eshop-backend.git
+- Product List
+- Checkout
+- Order Placement
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+<br />
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+<!-- Config & Env Vriables -->
+### 🔑 Config & Env Variables
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+All config and env variables can be found under /src/config/config.ts file.
 
-## Learn More
+<br />
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+<!-- Getting Started -->
+## 	🔥 Getting Started
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+<br />
+
+<!-- Prerequisites -->
+### 🚩 Prerequisites
+
+At first you need to clone the project to your local environment
+```bash
+  git clone https://github.com/dLeczycki/eshop-frontend.git
+```
+
+<br />
+
+<!-- Installation -->
+### 🌟 Installation
+
+Install node_modules with npm
+
+```bash
+  cd eshop-frontend
+  npm i
+```
+
+<br />
+
+<!-- Run Locally -->
+### ⚡ Run Locally
+
+Clone the project
+
+```bash
+  git clone https://github.com/dLeczycki/eshop-frontend.git
+```
+
+Go to the project directory
+
+```bash
+  cd eshop-frontend
+```
+
+Install dependencies
+
+```bash
+  npm i
+```
+
+Start the server
+
+```bash
+  npm start
+```
+
+<br />
+
+
+<!-- Deployment -->
+### 🌀 Deployment
+
+At first change src/config/config.ts file to production configuration
+
+To create production build run
+
+```bash
+  npm run build
+```
+
+Copy files to your hosting provider (e.g. with FTP protocol)
+
+Add support for React routing (below example of .htaccess file for Apache server)
+```
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /subdirectory
+RewriteRule ^index\.html$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-l
+RewriteRule . /index.html [L]
+</IfModule>
+```
